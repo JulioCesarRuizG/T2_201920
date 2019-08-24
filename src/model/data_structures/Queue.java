@@ -1,46 +1,70 @@
 package model.data_structures;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 
 public class Queue implements IQueue{
 
-	private Viaje primero;
-	private ArrayList<Viaje> cola;
-	
+	private Collection<Viaje> cola;
+
+	/**
+	 * Crea una nueva cola
+	 */
 	public Queue()
 	{
-		ArrayList<Viaje> pCola = new ArrayList<Viaje>();
+		Collection<Viaje> pCola = new ArrayList<Viaje>();
 		cola = pCola;
 	}
+
+	/**
+	 * Agrega un objeto T a la cola
+	 * @param valor a agregar
+	 */
 	public void enQueue(Object valor) 
 	{
 		Viaje viaje = (Viaje) valor;
 		cola.add(viaje);
 	}
 
+	/**
+	 * Elimina un objeto de la cola
+	 * @param valor buscado para eliminar
+	 * @return Sí lo elimina retorna el objeto, null en caso contrario
+	 */
 	public Viaje deQueue() {
-		Viaje viajeeliminar =cola.get(0);
-		cola.remove(0);
-		return viajeeliminar;
-	}
 
-	public boolean isEmpty() {
-		if(cola.isEmpty())
+		Viaje primero = null;
+		if(!cola.isEmpty())
 		{
-			return true;
+			primero = cola.iterator().next();
+			cola.remove(primero);
 		}
-		else return false;
-		
+		return primero;
 	}
 
+	/**
+	 * Comprueba que la cola esté vacía
+	 * @return True si está vacía, false en caso contrario
+	 */
+	public boolean isEmpty() {
+		return cola.isEmpty();
+	}
+
+	/**
+	 * Devuelve el tamaño de la cola
+	 * @return tamaño de la cola
+	 */
 	public int size() {
 		return cola.size();
 	}
-	
+
+	/**
+	 * Convierte la cola de objetos en un iterator
+	 * @return cola de objetos iterables
+	 */
 	public Iterator iterator() {
-		
-		return null;
+		return cola.iterator();
 	}
 
 }
