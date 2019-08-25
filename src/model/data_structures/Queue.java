@@ -4,7 +4,6 @@ import java.util.Iterator;
 
 public class Queue implements IQueue{
 
-	private Queue cola;
 	private Viaje primero;
 	
 	/**
@@ -30,7 +29,7 @@ public class Queue implements IQueue{
 	 */
 	public void enQueue(Object valor) 
 	{
-		if(cola.darPrimero() == null)
+		if(darPrimero() == null)
 		{
 			primero = (Viaje) valor;
 		}
@@ -51,7 +50,7 @@ public class Queue implements IQueue{
 	 */
 	public Viaje deQueue() {
 
-		if(cola.darPrimero() == null)
+		if(darPrimero() == null)
 		{
 			return null;
 		}
@@ -68,7 +67,7 @@ public class Queue implements IQueue{
 	 * @return True si está vacía, false en caso contrario
 	 */
 	public boolean isEmpty() {
-		if(cola.darPrimero() == null)
+		if(darPrimero() == null)
 		{
 			return true;
 		}
@@ -80,7 +79,7 @@ public class Queue implements IQueue{
 	 * @return tamaño de la cola
 	 */
 	public int size() {
-		if(cola.darPrimero() == null)
+		if(darPrimero() == null)
 		{
 			return 0;
 		}
@@ -102,7 +101,7 @@ public class Queue implements IQueue{
 	 * @return cola de objetos iterables
 	 */
 	public Iterator iterator() {
-		return cola.iterator();
+		falta implementar
 	}
 
 }

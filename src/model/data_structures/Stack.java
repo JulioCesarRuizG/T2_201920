@@ -7,7 +7,6 @@ import java.util.Iterator;
 public class Stack implements IStack{
 
 	private Viaje primero;
-	private Stack pila;
 	/**
 	 * Crea una nueva pila
 	 */
@@ -21,9 +20,9 @@ public class Stack implements IStack{
 	 * @param valor a agregar a la pila
 	 */
 	public void push(Object valor) {
-		if(pila.darPrimero() == null)
+		if(darPrimero() == null)
 		{
-			pila.cambiarPrimero((Viaje) valor);
+			cambiarPrimero((Viaje) valor);
 		}
 		else
 		{
@@ -43,12 +42,12 @@ public class Stack implements IStack{
 	 */
 	public Object pop() {
 		Viaje actual = null;
-		if(pila.size() != 0)
+		if(size() != 0)
 		{
 			actual = primero;
-			if(pila.size() == 1)
+			if(size() == 1)
 			{
-				pila.cambiarPrimero(null);
+				cambiarPrimero(null);
 				return primero;
 			}
 			else
@@ -71,7 +70,7 @@ public class Stack implements IStack{
 	 * @return true si está vacío, false en caso contrario
 	 */
 	public boolean isEmpty() {
-		if(pila.darPrimero() == null)
+		if(darPrimero() == null)
 		{
 			return true;
 		}
@@ -85,7 +84,7 @@ public class Stack implements IStack{
 	public int size(){
 		int tamano = 1;
 		Viaje actual = primero;
-		if(pila.darPrimero() == null)
+		if(darPrimero() == null)
 		{
 			return 0;
 		}
@@ -102,14 +101,22 @@ public class Stack implements IStack{
 	 * @return pila de objetos iterable
 	 */
 	public Iterator iterator() {
-		return pila.iterator();
+		falta implementar
 	}
 
+	/**
+	 * Devuelve el primer elemento de la pila
+	 * @return primero
+	 */
 	public Viaje darPrimero()
 	{
 		return primero;
 	}
 
+	/**
+	 * Cambia el primer elemento de la pila
+	 * @param valor por el que se cambia
+	 */
 	public void cambiarPrimero(Viaje cambio)
 	{
 		primero = cambio;
