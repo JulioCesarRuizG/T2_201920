@@ -1,20 +1,27 @@
 package model.data_structures;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Iterator;
 
 public class Queue implements IQueue{
 
-	private Collection<Viaje> cola;
-
+	private Queue cola;
+	private Viaje primero;
+	
 	/**
 	 * Crea una nueva cola
 	 */
-	public Queue()
+	public Queue(Viaje pPrimero)
 	{
-		Collection<Viaje> pCola = new ArrayList<Viaje>();
-		cola = pCola;
+		primero = pPrimero;
+	}
+	
+	/**
+	 * Devuelve el primer viaje de la cola
+	 * @return primer viaje
+	 */
+	public Viaje darPrimero()
+	{
+		return primero;
 	}
 
 	/**
@@ -23,24 +30,37 @@ public class Queue implements IQueue{
 	 */
 	public void enQueue(Object valor) 
 	{
-		Viaje viaje = (Viaje) valor;
-		cola.add(viaje);
+		if(cola.darPrimero() == null)
+		{
+			primero = (Viaje) valor;
+		}
+		else
+		{
+			Viaje actual = primero; 
+			while(actual.darSiguiente() != null)
+			{
+				actual = actual.darSiguiente();
+			}
+			actual.cambiarSiguiente((Viaje)valor);
+		}
 	}
 
 	/**
 	 * Elimina un objeto de la cola
-	 * @param valor buscado para eliminar
 	 * @return Sí lo elimina retorna el objeto, null en caso contrario
 	 */
 	public Viaje deQueue() {
 
-		Viaje primero = null;
-		if(!cola.isEmpty())
+		if(cola.darPrimero() == null)
 		{
-			primero = cola.iterator().next();
-			cola.remove(primero);
+			return null;
 		}
-		return primero;
+		else
+		{
+			Viaje eliminado = primero;
+			primero = primero.darSiguiente();
+			return eliminado;	
+		}
 	}
 
 	/**
@@ -48,7 +68,11 @@ public class Queue implements IQueue{
 	 * @return True si está vacía, false en caso contrario
 	 */
 	public boolean isEmpty() {
-		return cola.isEmpty();
+		if(cola.darPrimero() == null)
+		{
+			return true;
+		}
+		else return false;
 	}
 
 	/**
@@ -56,7 +80,21 @@ public class Queue implements IQueue{
 	 * @return tamaño de la cola
 	 */
 	public int size() {
-		return cola.size();
+		if(cola.darPrimero() == null)
+		{
+			return 0;
+		}
+		else
+		{
+			int cantidad = 1;
+			Viaje actual = primero;
+			while(actual.darSiguiente() != null)
+			{
+				actual = actual.darSiguiente();
+				cantidad ++;
+			}
+			return cantidad;
+		}
 	}
 
 	/**

@@ -4,21 +4,21 @@ public class Viaje {
 
 	private int inicioID;
 	private int destinoID;
-	private int mes;
-	private double tiempoPromedio;
+	private int hora;
+	private double tiempoPromedioEnSegundos;
 	private double desviacionEstandar;
-	private double tiempoPromedioG;
+	private double tiempoPromedioGEnSegundos;
 	private double desviacionEstandarG;
 	private Viaje siguiente;
 
-	public Viaje(int pInicioID, int pDestinoID, int pMes, double pTiempoPromedio, double pDesviacionEstandar, double pTiempoPromedioG, double pDesviacionEstandarG, Viaje pSiguiente)
+	public Viaje(int pInicioID, int pDestinoID, int pHora, double pTiempoPromedioEnSegundos, double pDesviacionEstandar, double pTiempoPromedioGEnSegundos, double pDesviacionEstandarG, Viaje pSiguiente)
 	{
 		inicioID = pInicioID;
 		destinoID = pDestinoID;
-		mes = pMes;
-		tiempoPromedio = pTiempoPromedio;
+		hora = pHora;
+		tiempoPromedioEnSegundos = pTiempoPromedioEnSegundos;
 		desviacionEstandar = pDesviacionEstandar;
-		tiempoPromedioG = pTiempoPromedioG;
+		tiempoPromedioGEnSegundos = pTiempoPromedioGEnSegundos;
 		desviacionEstandarG = pDesviacionEstandarG;
 		siguiente = pSiguiente;
 	}
@@ -30,21 +30,21 @@ public class Viaje {
 	{
 		return destinoID;
 	}
-	public int darMes()
+	public int darHora()
 	{
-		return mes;
+		return hora;
 	}
-	public double darTiempoPromedio()
+	public double darTiempoPromedioEnSegundos()
 	{
-		return tiempoPromedio;
+		return tiempoPromedioEnSegundos;
 	}
 	public double darDesviacionEstandar()
 	{
 		return desviacionEstandar;
 	}
-	public double darTiempoPromedioG()
+	public double darTiempoPromedioGEnSegundos()
 	{
-		return tiempoPromedioG;
+		return tiempoPromedioGEnSegundos;
 	}
 	public double darDesviacionEstandarG()
 	{

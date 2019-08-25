@@ -6,24 +6,35 @@ import java.util.Iterator;
 
 public class Stack implements IStack{
 
-	private Collection<Viaje> pila;
-	
+	private Viaje primero;
+	private Stack pila;
 	/**
 	 * Crea una nueva pila
 	 */
-	public Stack()
+	public Stack(Viaje pPrimero)
 	{
-		Collection<Viaje> pPila = new ArrayList<Viaje>();
-		pila = pPila;
+		primero = pPrimero;
 	}
-	
+
 	/**
 	 * Agrega un valor a la pila
 	 * @param valor a agregar a la pila
 	 */
 	public void push(Object valor) {
-		Viaje viaje = (Viaje) valor;
-		pila.add(viaje);
+		if(pila.darPrimero() == null)
+		{
+			pila.cambiarPrimero((Viaje) valor);
+		}
+		else
+		{
+			Viaje actual = primero;
+			while(actual.darSiguiente() != null)
+			{
+				actual=actual.darSiguiente();
+			}
+			Viaje agregar = (Viaje) valor;
+			actual.cambiarSiguiente(agregar);
+		}
 	}
 
 	/**
@@ -31,16 +42,28 @@ public class Stack implements IStack{
 	 * @return valor eliminado, null en caso contrario
 	 */
 	public Object pop() {
-		Viaje ultimo = null;
-		if(!pila.isEmpty())
+		Viaje actual = null;
+		if(pila.size() != 0)
 		{
-			while(pila.iterator().hasNext())
+			actual = primero;
+			if(pila.size() == 1)
 			{
-				ultimo = pila.iterator().next();
+				pila.cambiarPrimero(null);
+				return primero;
 			}
-			pila.remove(ultimo);
+			else
+			{
+				Viaje eliminado = null;
+				while(actual.darSiguiente().darSiguiente() != null)
+				{
+					actual = actual.darSiguiente();
+					eliminado = actual.darSiguiente().darSiguiente();
+				}
+				actual.cambiarSiguiente(null);
+				return eliminado;
+			}
 		}
-		return ultimo;
+		return null;
 	}
 
 	/**
@@ -48,17 +71,32 @@ public class Stack implements IStack{
 	 * @return true si está vacío, false en caso contrario
 	 */
 	public boolean isEmpty() {
-		return pila.isEmpty();
+		if(pila.darPrimero() == null)
+		{
+			return true;
+		}
+		else return false;
 	}
 
 	/**
 	 * Devuelve el tamaño de la pila
 	 * @return tamaño de la pila
 	 */
-	public int size() {
-		return pila.size();
+	public int size(){
+		int tamano = 1;
+		Viaje actual = primero;
+		if(pila.darPrimero() == null)
+		{
+			return 0;
+		}
+		while(actual.darSiguiente() != null)
+		{
+			actual = actual.darSiguiente();
+			tamano++;
+		}
+		return tamano;
 	}
-	
+
 	/**
 	 * Convierte la pila de objetos en un iterator
 	 * @return pila de objetos iterable
@@ -67,4 +105,13 @@ public class Stack implements IStack{
 		return pila.iterator();
 	}
 
+	public Viaje darPrimero()
+	{
+		return primero;
+	}
+
+	public void cambiarPrimero(Viaje cambio)
+	{
+		primero = cambio;
+	}
 }

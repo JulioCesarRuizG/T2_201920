@@ -13,7 +13,6 @@ public interface IQueue<T>{
 	
 	/**
 	 * Elimina un objeto de la cola
-	 * @param valor buscado para eliminar
 	 * @return Sí lo elimina retorna el objeto, null en caso contrario
 	 */
 	public T deQueue();
