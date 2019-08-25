@@ -1,6 +1,9 @@
 package model.data_structures;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 
 public class Queue implements IQueue{
 
@@ -101,7 +104,14 @@ public class Queue implements IQueue{
 	 * @return cola de objetos iterables
 	 */
 	public Iterator iterator() {
-		falta implementar
+		Viaje actual =  primero;
+		Collection lista = new ArrayList<Viaje>();
+		while(actual.darSiguiente() != null)
+		{
+			lista.add(actual);
+			actual = actual.darSiguiente();
+		}
+		return lista.iterator();
 	}
 
 }

@@ -101,7 +101,14 @@ public class Stack implements IStack{
 	 * @return pila de objetos iterable
 	 */
 	public Iterator iterator() {
-		falta implementar
+		Viaje actual =  primero;
+		Collection lista = new ArrayList<>();
+		while(actual.darSiguiente() != null)
+		{
+			lista.add(actual);
+			actual = actual.darSiguiente();
+		}
+		return lista.iterator();
 	}
 
 	/**
