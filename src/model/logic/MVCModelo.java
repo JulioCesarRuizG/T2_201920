@@ -120,6 +120,18 @@ public class MVCModelo {
 	     }
 		return cluster;
 	}
+	public Queue ultimosViajes(int N,int Hora){
+		Queue base = new Queue(null);
+		while(base.size()<N){
+			Viaje agregar = pila.pop();
+			if(agregar.darHora()==Hora){
+				base.enQueue(agregar);
+			}
+		}
+		 Queue ultimos= new Queue(null);
+	  
+		return ultimos;
+	}
 
 	/**
 	 * Requerimiento de agregar dato

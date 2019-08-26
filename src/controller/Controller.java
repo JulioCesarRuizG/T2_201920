@@ -30,8 +30,7 @@ public class Controller {
 	{
 		Scanner lector = new Scanner(System.in);
 		boolean fin = false;
-		String dato = "";
-		String respuesta = "";
+		
 
 		while( !fin ){
 			view.printMenu();
@@ -45,54 +44,21 @@ public class Controller {
 					System.out.println("Cluster más grande:");
 					for(int i=0;i<cluster.size();i++)
 					{ Viaje viaje= cluster.deQueue();
-					System.out.println("--------- \nElemento: "+i + ", Hora:" + viaje.darHora() +"\n---------");						
+					System.out.println("--------- \nElemento: "+i + ", Hora:" + viaje.darHora() +",Zona Origen:"+viaje.darInicioID()+", Zona Destino:"+viaje.darDestinoID()+",Tiempo promedio:"+viaje.darTiempoPromedioEnSegundos()+"\n---------");						
 					}break;
 
 				case 2:
-					System.out.println("--------- \nDar cadena (simple) a ingresar: ");
-					dato = lector.next();
-					modelo.agregar(dato);
-					System.out.println("Dato agregado");
-					System.out.println("Numero actual de elementos " + modelo.darTamano() + "\n---------");						
-					break;
-
-				case 3:
-					System.out.println("--------- \nDar cadena (simple) a buscar: ");
-					dato = lector.next();
-					respuesta = modelo.buscar(dato);
-					if ( respuesta != null)
-					{
-						System.out.println("Dato encontrado: "+ respuesta);
+					System.out.println("--------- \nDar hora inicial para dar la info de los ultimos viajes: ");
+					int hora2=lector.nextInt();
+					System.out.println("--------- \nDar la cantidad de viajes para dar la info de los ultimos viajes: ");
+					int N=lector.nextInt();
+					Queue ultimos=modelo.ultimosViajes(N, hora2);
+					for(int i=0;i<ultimos.size();i++)
+					{ Viaje viaje= ultimos.deQueue();
+					System.out.println("--------- \nElemento: "+i + ", Hora:" + viaje.darHora() +",Zona Origen:"+viaje.darInicioID()+", Zona Destino:"+viaje.darDestinoID()+",Tiempo promedio:"+viaje.darTiempoPromedioEnSegundos()+"\n---------");						
 					}
-					else
-					{
-						System.out.println("Dato NO encontrado");
-					}
-					System.out.println("Numero actual de elementos " + modelo.darTamano() + "\n---------");						
-					break;
-
-				case 4:
-					System.out.println("--------- \nDar cadena (simple) a eliminar: ");
-					dato = lector.next();
-					respuesta = modelo.eliminar(dato);
-					if ( respuesta != null)
-					{
-						System.out.println("Dato eliminado "+ respuesta);
-					}
-					else
-					{
-						System.out.println("Dato NO eliminado");							
-					}
-					System.out.println("Numero actual de elementos " + modelo.darTamano() + "\n---------");						
-					break;
-
-				case 5: 
-					System.out.println("--------- \nContenido del Arreglo: ");
-					view.printModelo(modelo);
-					System.out.println("Numero actual de elementos " + modelo.darTamano() + "\n---------");						
-					break;	
 					
-				case 6: 
+				case 3: 
 					System.out.println("--------- \n Hasta pronto !! \n---------"); 
 					lector.close();
 					fin = true;
