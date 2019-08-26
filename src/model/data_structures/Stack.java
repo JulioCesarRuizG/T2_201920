@@ -40,7 +40,7 @@ public class Stack implements IStack{
 	 * Elimina el último valor de la pila
 	 * @return valor eliminado, null en caso contrario
 	 */
-	public Object pop() {
+	public Viaje pop() {
 		Viaje actual = null;
 		if(size() != 0)
 		{

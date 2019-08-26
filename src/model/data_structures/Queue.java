@@ -105,6 +105,8 @@ public class Queue implements IQueue{
 	 */
 	public Iterator iterator() {
 		Viaje actual =  primero;
+
+
 		Collection lista = new ArrayList<Viaje>();
 		while(actual.darSiguiente() != null)
 		{
