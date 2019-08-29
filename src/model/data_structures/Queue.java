@@ -8,6 +8,7 @@ import java.util.List;
 public class Queue implements IQueue{
 
 	private Viaje primero;
+	private Viaje ultimo;
 	
 	/**
 	 * Crea una nueva cola
@@ -15,6 +16,7 @@ public class Queue implements IQueue{
 	public Queue(Viaje pPrimero)
 	{
 		primero = pPrimero;
+		ultimo = pPrimero;
 	}
 	
 	/**
@@ -24,6 +26,15 @@ public class Queue implements IQueue{
 	public Viaje darPrimero()
 	{
 		return primero;
+	}
+	
+	/**
+	 * Devuelve el ultimo viaje de la cola
+	 * @return ultimo viaje
+	 */
+	public Viaje darUltimo()
+	{
+		return ultimo;
 	}
 
 	/**
@@ -35,15 +46,12 @@ public class Queue implements IQueue{
 		if(darPrimero() == null)
 		{
 			primero = (Viaje) valor;
+			ultimo =  (Viaje) valor;
 		}
 		else
 		{
-			Viaje actual = primero; 
-			while(actual.darSiguiente() != null)
-			{
-				actual = actual.darSiguiente();
-			}
-			actual.cambiarSiguiente((Viaje)valor);
+			ultimo.cambiarSiguiente((Viaje) valor);
+			ultimo = ultimo.darSiguiente();
 		}
 	}
 
@@ -57,11 +65,18 @@ public class Queue implements IQueue{
 		{
 			return null;
 		}
+		else if(primero.darSiguiente() == null)
+		{
+			Viaje eliminar = primero;
+			primero = null;
+			ultimo = null;
+			return eliminar;
+		}
 		else
 		{
-			Viaje eliminado = primero;
+			Viaje eliminar = primero;
 			primero = primero.darSiguiente();
-			return eliminado;	
+			return eliminar;
 		}
 	}
 
@@ -105,8 +120,6 @@ public class Queue implements IQueue{
 	 */
 	public Iterator iterator() {
 		Viaje actual =  primero;
-
-
 		Collection lista = new ArrayList<Viaje>();
 		while(actual.darSiguiente() != null)
 		{

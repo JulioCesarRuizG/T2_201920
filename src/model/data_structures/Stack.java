@@ -26,13 +26,10 @@ public class Stack implements IStack{
 		}
 		else
 		{
-			Viaje actual = primero;
-			while(actual.darSiguiente() != null)
-			{
-				actual=actual.darSiguiente();
-			}
-			Viaje agregar = (Viaje) valor;
-			actual.cambiarSiguiente(agregar);
+			Viaje nuevo  = (Viaje) valor;
+			Viaje cambiar  = primero;
+			cambiarPrimero(nuevo);
+			nuevo.cambiarSiguiente(cambiar);
 		}
 	}
 
@@ -41,28 +38,16 @@ public class Stack implements IStack{
 	 * @return valor eliminado, null en caso contrario
 	 */
 	public Viaje pop() {
-		Viaje actual = null;
-		if(size() != 0)
+		if(primero == null)
 		{
-			actual = primero;
-			if(size() == 1)
-			{
-				cambiarPrimero(null);
-				return primero;
-			}
-			else
-			{
-				Viaje eliminado = null;
-				while(actual.darSiguiente().darSiguiente() != null)
-				{
-					actual = actual.darSiguiente();
-					eliminado = actual.darSiguiente().darSiguiente();
-				}
-				actual.cambiarSiguiente(null);
-				return eliminado;
-			}
+			return null;
 		}
-		return null;
+		else
+		{
+			Viaje eliminar = primero;
+			primero = primero.darSiguiente();
+			return eliminar;
+		}
 	}
 
 	/**
